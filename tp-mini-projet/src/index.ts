@@ -6,6 +6,11 @@ async function main(): Promise<void> {
   const playlist = new Playlist("Mes Favoris 2025");
 
   try {
+    const titresFallback = await rechercherTitres("Daftt Punkkkk");
+    console.log(titresFallback);
+    const titresMatchAvecFallback = await rechercherTitres("Lose Yourself");
+    console.log(titresMatchAvecFallback);
+
     const titres = await rechercherTitres("Daft Punk");
     console.log(titres); // pour vérifier que la recherche fonctionne
     titres.forEach((c) => playlist.ajouter(c));
