@@ -35,9 +35,9 @@ export class Playlist {
     }
     const index = Math.floor(Math.random() * this.#titres.length);
     const chanson = this.#titres[index];
-    console.log(
+   /* console.log(
       `Lecture aléatoire: "${chanson.titre}" - ${chanson.artiste} (${chanson.style})`,
-    );
+    );*/
   }
 
   // Bonus: Filtre

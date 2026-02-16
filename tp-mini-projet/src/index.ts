@@ -7,8 +7,11 @@ async function main(): Promise<void> {
 
   try {
     const titres = await rechercherTitres("Daft Punk");
+    console.log(titres); // pour vérifier que la recherche fonctionne
     titres.forEach((c) => playlist.ajouter(c));
     console.log("Playlist mise à jour !");
+    const titresVide = await rechercherTitres("");
+    console.log(titresVide);
   } catch (e) {
     console.error("Erreur lors de la recherche:", e);
   }
