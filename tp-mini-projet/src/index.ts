@@ -16,13 +16,14 @@ async function main(): Promise<void> {
     console.error("Erreur lors de la recherche:", e);
   }
 
-  console.log("Durée totale (secondes):", playlist.obtenirDureeTotale());
+  console.log("Durée totale playlist (secondes):", playlist.obtenirDureeTotale());
 
   const playlistBonus = new Playlist("Mes Bonus");
   const fakeCatalogue = returnFakeCatalogue();
   fakeCatalogue.forEach((c) => playlistBonus.ajouter(c));
   playlistBonus.jouerAleatoire();
-  console.log(playlistBonus.filtrerParStyle(StyleMusical.ROCK));
+  console.log(playlistBonus.filtrerParStyle(StyleMusical.ELECTRO));
+  console.log("Durée totale playlist bonus (secondes):", playlistBonus.obtenirDureeTotale());
 
 }
 
