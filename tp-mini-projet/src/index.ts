@@ -7,12 +7,12 @@ async function main(): Promise<void> {
 
   try {
     const titresFallback = await rechercherTitres("Daftt Punkkkk");
-    console.log(titresFallback);
+    console.log(titresFallback); // pour vérifier que la recherche fonctionne
     const titresMatchAvecFallback = await rechercherTitres("Lose Yourself");
     console.log(titresMatchAvecFallback);
 
     const titres = await rechercherTitres("Daft Punk");
-    console.log(titres); // pour vérifier que la recherche fonctionne
+    console.log(titres); 
     titres.forEach((c) => playlist.ajouter(c));
     console.log("Playlist mise à jour !");
     const titresVide = await rechercherTitres("");
