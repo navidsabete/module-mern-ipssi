@@ -1,6 +1,6 @@
 import { Playlist } from "./models/Playlist";
 import { StyleMusical } from "./models/Types";
-import { rechercherTitres } from "./services/MusicAPI";
+import { rechercherTitres, returnFakeCatalogue } from "./services/MusicAPI";
 
 async function main(): Promise<void> {
   const playlist = new Playlist("Mes Favoris 2025");
@@ -17,6 +17,12 @@ async function main(): Promise<void> {
   }
 
   console.log("Durée totale (secondes):", playlist.obtenirDureeTotale());
+
+  const playlistBonus = new Playlist("Mes Bonus");
+  const fakeCatalogue = returnFakeCatalogue();
+  fakeCatalogue.forEach((c) => playlistBonus.ajouter(c));
+  playlistBonus.jouerAleatoire();
+  console.log(playlistBonus.filtrerParStyle(StyleMusical.ROCK));
 
 }
 

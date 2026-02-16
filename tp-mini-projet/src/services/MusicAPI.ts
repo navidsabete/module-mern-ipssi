@@ -11,6 +11,10 @@ const fakeCatalogue: ReadonlyArray<Chanson> = [
   { titre: "Blinding Lights", artiste: "The Weeknd", duree: 200, style: StyleMusical.POP },
 ];
 
+export function returnFakeCatalogue()  {
+    return fakeCatalogue;
+}
+
 export async function rechercherTitres(requete: string): Promise<Chanson[]> {
   const normalized = requete.trim();
   if (normalized.length === 0) {
