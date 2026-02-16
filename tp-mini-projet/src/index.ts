@@ -1,19 +1,34 @@
 import { Playlist } from "./models/Playlist";
 import { StyleMusical } from "./models/Types";
-import { rechercherTitres } from "./services/MusicAPI";
+import { rechercherTitres, returnFakeCatalogue } from "./services/MusicAPI";
 
 async function main(): Promise<void> {
   const playlist = new Playlist("Mes Favoris 2025");
 
   try {
+    const titresFallback = await rechercherTitres("Daftt Punkkkk");
+    console.log(titresFallback); // pour vérifier que la recherche fonctionne
+    const titresMatchAvecFallback = await rechercherTitres("Lose Yourself");
+    console.log(titresMatchAvecFallback);
+
     const titres = await rechercherTitres("Daft Punk");
+    console.log(titres); 
     titres.forEach((c) => playlist.ajouter(c));
     console.log("Playlist mise à jour !");
+    const titresVide = await rechercherTitres("");
+    console.log(titresVide);
   } catch (e) {
     console.error("Erreur lors de la recherche:", e);
   }
 
-  console.log("Durée totale (secondes):", playlist.obtenirDureeTotale());
+  console.log("Durée totale playlist (secondes):", playlist.obtenirDureeTotale());
+
+  const playlistBonus = new Playlist("Mes Bonus");
+  const fakeCatalogue = returnFakeCatalogue();
+  fakeCatalogue.forEach((c) => playlistBonus.ajouter(c));
+  playlistBonus.jouerAleatoire();
+  console.log(playlistBonus.filtrerParStyle(StyleMusical.ELECTRO));
+  console.log("Durée totale playlist bonus (secondes):", playlistBonus.obtenirDureeTotale());
 
 }
 

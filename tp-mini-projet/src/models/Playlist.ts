@@ -35,9 +35,11 @@ export class Playlist {
     }
     const index = Math.floor(Math.random() * this.#titres.length);
     const chanson = this.#titres[index];
-    console.log(
-      `Lecture aléatoire: "${chanson.titre}" - ${chanson.artiste} (${chanson.style})`,
-    );
+    if(chanson){
+      console.log(
+        `Lecture aléatoire: "${chanson.titre}" - ${chanson.artiste} (${chanson.style})`,
+      );
+    }
   }
 
   // Bonus: Filtre
@@ -45,4 +47,3 @@ export class Playlist {
     return this.#titres.filter((c) => c.style === style);
   }
 }
-
