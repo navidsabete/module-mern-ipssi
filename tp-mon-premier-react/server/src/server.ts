@@ -24,6 +24,7 @@ interface Book {
 interface Task {
   id: number;
   label: string;
+  isDone: boolean;
 }
 
 let books: Book[] = [ 
@@ -32,9 +33,9 @@ let books: Book[] = [
   { id: 3, title: "Mon Livre 3", author: "Mon Auteur 3" } ];
 
 const tasks: Task[] = [
-  { id: 1, label: 'Tâche 1' },
-  { id: 2, label: 'Tâche 2' },
-  { id: 3, label: 'Tâche 3' },
+  { id: 1, label: 'Tâche 1', isDone: true },
+  { id: 2, label: 'Tâche 2', isDone: false },
+  { id: 3, label: 'Tâche 3', isDone: false },
 ];
 
 // --- ROUTES --- 
