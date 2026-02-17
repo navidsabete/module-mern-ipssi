@@ -1,7 +1,111 @@
-button {
-    border-radius: 15px;
+/* ======== Reset basique ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h1 {
-    color: green;
+/* ======== Couleurs et thèmes ======== */
+:root {
+    --primary-color: lightblue;       
+    --secondary-color: #6366f1;     /* violet clair */
+    --accent-color: #f472b6;        /* rose pastel */
+    --bg-color: #f9fafb;            /* fond très clair */
+    --text-color: #111827;          /* texte sombre */
+    --card-bg: #ffffff;             /* fond des cartes */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ======== Corps de page ======== */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+
+/* ======== Barre de navigation ======== */
+nav {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Liste de liens */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a:hover {
+    background-color: #6366f1; /* violet clair au survol */
+    transform: translateY(-2px);
+}
+
+/* ======== Titres ======== */
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* ======== Boutons ======== */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+/* ======== Cartes ======== */
+.card, .book-list {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    margin: 20px auto;
+    max-width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px var(--shadow-color);
+}
+
+/* ======== Liens ======== */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color);
 }
