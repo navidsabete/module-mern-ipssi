@@ -6,7 +6,7 @@ interface BookProps {
 // TODO : Créez le composant qui reçoit ces props 
 const BookCard = (book: BookProps) => { 
     return ( 
-    <div style={{ padding: '10px', margin: '10px' }}>
+    <div className="card" style={{ padding: '10px', margin: '10px' }}>
         <h3>{book.title}</h3> 
         <p>Par : {book.author}</p> 
     </div> 

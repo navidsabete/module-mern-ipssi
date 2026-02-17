@@ -8,12 +8,12 @@
 
 /* ======== Couleurs et thèmes ======== */
 :root {
-    --primary-color: lightblue;       
-    --secondary-color: #6366f1;     /* violet clair */
-    --accent-color: #f472b6;        /* rose pastel */
-    --bg-color: #f9fafb;            /* fond très clair */
-    --text-color: #111827;          /* texte sombre */
-    --card-bg: #ffffff;             /* fond des cartes */
+    --primary-color: #0000ffa5;       
+    --secondary-color: #6366f1;     
+    --accent-color: #ab64f7;        
+    --bg-color: rgb(232, 223, 223);          
+    --text-color: #111827;          
+    --card-bg: #ffffff;             
     --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -94,7 +94,7 @@ button:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card:hover {
+.card:hover, .book-list:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px var(--shadow-color);
 }
