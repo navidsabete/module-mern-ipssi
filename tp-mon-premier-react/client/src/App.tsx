@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Link} from "react-router-dom";
 import BookCard from "./components/BookCard";
+import TaskList from "./components/TaskList";
 
   const myBooks = [ 
   { id: 1, title: "Mon Livre 1", author: "Mon Auteur 1" },
@@ -11,6 +12,7 @@ const Home = () => {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'Arial' }}>
       <h2>Page d'accueil</h2>
+      <TaskList />
     </div>
   );
 } 
@@ -77,6 +79,7 @@ function App() {
             <Link to="/" onClick={() => setCountClick(countClick + 1)}>Accueil</Link> | <Link to="/library" onClick={() => setCountClick(countClick + 1)}>Livres</Link> | <Link to="/compteur" onClick={() => setCountClick(countClick + 1)}>Compteur</Link> | <span>Compteur clic : {countClick}</span>
             </nav> 
             <main style={{ padding: '20px' }}> 
+              
               <Routes> 
                 <Route path="/" element={<Home />} /> 
                 <Route path="/library" element={<Library />} />

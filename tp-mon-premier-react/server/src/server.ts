@@ -21,10 +21,21 @@ interface Book {
   author: string;
 }
 
+interface Task {
+  id: number;
+  label: string;
+}
+
 let books: Book[] = [ 
   { id: 1, title: "Mon Livre 1", author: "Mon Auteur 1" },
   { id: 2, title: "Mon Livre 2", author: "Mon Auteur 2" }, 
   { id: 3, title: "Mon Livre 3", author: "Mon Auteur 3" } ];
+
+const tasks: Task[] = [
+  { id: 1, label: 'Tâche 1' },
+  { id: 2, label: 'Tâche 2' },
+  { id: 3, label: 'Tâche 3' },
+];
 
 // --- ROUTES --- 
 // Route de test 
@@ -81,7 +92,13 @@ app.delete('/api/books/:id', (req: Request, res: Response) => {
 }
 );
 
-
+app.get('/api/tasks', (req: Request, res: Response) => {
+    console.log("GET /api/tasks");
+  // Simulation d'un petit délai réseau (important pour voir "Chargement...")
+  setTimeout(() => {
+    res.json(tasks);
+  }, 1000);
+});
 
 // --- DÉMARRAGE ---
 
