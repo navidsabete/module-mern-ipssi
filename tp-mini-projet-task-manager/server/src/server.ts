@@ -12,97 +12,72 @@ app.use(cors());
 // 2. Celui pour lire le JSON dans le body des requêtes
 app.use(express.json());
 
-// --- DONNÉES --- 
-// Simulation de base de données en mémoire
-
-interface Book {
-  id: number;
-  title: string;
-  author: string;
-}
-
-interface Task {
-  id: number;
-  label: string;
-  isDone: boolean;
-}
-
-let books: Book[] = [ 
-  { id: 1, title: "Mon Livre 1", author: "Mon Auteur 1" },
-  { id: 2, title: "Mon Livre 2", author: "Mon Auteur 2" }, 
-  { id: 3, title: "Mon Livre 3", author: "Mon Auteur 3" } ];
-
-const tasks: Task[] = [
-  { id: 1, label: 'Tâche 1', isDone: true },
-  { id: 2, label: 'Tâche 2', isDone: false },
-  { id: 3, label: 'Tâche 3', isDone: false },
+app.use((req: Request, res: Response, next) => {
+    console.log(`Requête reçue : ${req.method} ${req.url}`);
+    next();
+});
+app.get('/', (req: Request, res: Response) => res.send("Le serveur répond bien !"));
+// "Base de données" temporaire en RAM
+let tasks = [
+    { id: 1, label: "Apprendre Express", isDone: false },
+    { id: 2, label: "Réussir le projet", isDone: true }
 ];
 
-// --- ROUTES --- 
-// Route de test 
-app.get('/', (req, res) => { 
-    console.log("GET /");
-    res.send('API Library v1.0 is running...'); 
+// --- ROUTES ---
+
+// 1. GET /api/tasks : Récupérer tout
+app.get('/api/tasks', (req: Request, res: Response) => {
+    res.json(tasks);
 });
 
-app.get('/api/books', (req: Request, res: Response) => { 
-    console.log("GET /api/books");
-    res.json(books); 
-});
-
-
-app.post('/api/books', (req: Request, res: Response) => { 
-    console.log("POST /api/books");
-    const { title, author } = req.body;
-
-    if (!title || !author) {
-        return res.status(400).json({ message: 'Title and author doivent être récupérés !' });
+// 2. POST /api/tasks : Créer une tâche
+app.post('/api/tasks', (req: Request, res: Response) => {
+    const { label } = req.body;
+    
+    if (!label) {
+        return res.status(400).json({ error: "Le label est requis" });
     }
 
-    const newBook: Book = {
-        id: Date.now(), // ID unique basé sur la date/heure actuelle
-        title,
-        author,
+    const newTask = {
+        id: Date.now(), // Génération d'ID simple
+        label: label,
+        isDone: false
     };
 
-    books.push(newBook);
-
-    res.status(201).json(newBook);
-
+    tasks.push(newTask);
+    res.status(201).json(newTask);
 });
 
+// 3. PUT /api/tasks/:id : Inverser l'état isDone
+app.put('/api/tasks/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const task = tasks.find(t => t.id === id);
 
-app.delete('/api/books/:id', (req: Request, res: Response) => {
-    const bookID = Number(req.params.id);
-    console.log(`DELETE /api/books/${bookID}`);
-
-    if (isNaN(bookID)) {
-        return res.status(400).json({ message: 'BookID invalide' });
+    if (!task) {
+        return res.status(404).json({ error: "Tâche non trouvée" });
     }
 
-    const bookExists = books.some(book => book.id === bookID);
-
-    if (!bookExists) {
-        return res.status(404).json({ message: 'Book non trouvé' });
-    }
-
-    books = books.filter(book => book.id !== bookID);
-
-    res.status(200).json({ message: 'Book supprimé avec succès' });
-
-}
-);
-
-app.get('/api/tasks', (req: Request, res: Response) => {
-    console.log("GET /api/tasks");
-  // Simulation d'un petit délai réseau (important pour voir "Chargement...")
-  setTimeout(() => {
-    res.json(tasks);
-  }, 1000);
+    // On inverse l'état actuel
+    task.isDone = !task.isDone;
+    
+    res.json(task);
 });
 
-// --- DÉMARRAGE ---
+// 4. DELETE /api/tasks/:id : Supprimer
+app.delete('/api/tasks/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const initialLength = tasks.length;
+    
+    // On filtre pour garder tout sauf l'ID concerné
+    tasks = tasks.filter(t => t.id !== id);
+
+    if (tasks.length === initialLength) {
+        return res.status(404).json({ error: "Tâche non trouvée" });
+    }
+
+    res.json({ message: "Tâche supprimée avec succès", id });
+});
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Serveur Task Manager démarré sur http://localhost:${PORT}`);
 });
