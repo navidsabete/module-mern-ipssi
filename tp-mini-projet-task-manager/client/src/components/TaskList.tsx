@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
 interface Task { 
-    id: number; 
-    label: string; 
-    isDone: boolean; 
+    id: number; // Généré par le serveur (ex: Date.now())
+    label: string;  // Le texte de la tâche
+    isDone: boolean; // false par défaut à la création
 }
 
 export default function TaskList() { 
@@ -23,11 +23,10 @@ useEffect(() => {
 
 
     const fetchTasks = async () => { 
-        // TODO : (voir étape 2) 
         try { 
             // On s'assure que l'erreur est vide avant de commencer 
             setError(null);
-            const response = await fetch('http://localhost:3001/api/tasks');
+            const response = await fetch('/api/tasks');
 
             // ÉTAPE CRUCIALE : Vérifier le status HTTP 
             if (!response.ok) { throw new Error(`Erreur HTTP: ${response.status}`); }
