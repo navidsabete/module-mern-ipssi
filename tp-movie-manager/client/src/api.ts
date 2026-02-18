@@ -5,6 +5,8 @@ export interface Movie {
     year: number;
     genre : string;
     duration : number;
+    poster?: string;
+    description?: string;
 }
 
 
@@ -54,7 +56,6 @@ export async function createMovie(movie: Omit<Movie, "_id">): Promise<Movie> {
 
 
 
-// --------------------
 // PUT /api/movies/:id → mettre à jour un film
 export async function updateMovie(id: string, updateData: Partial<Movie>): Promise<Movie> {
   const response = await fetch(`${BASE_URL}/${id}`, {
