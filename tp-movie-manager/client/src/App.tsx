@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAllMovies, getMovieById, createMovie, updateMovie, deleteMovie, type Movie } from './api';
+import { getAllMovies, getMovieById, createMovie, updateMovie, deleteMovie, type Movie, type MovieFilters } from './api';
 
 function App() { 
 
@@ -22,6 +22,11 @@ const [newMovie, setNewMovie] = useState({
     duration: 0
   });
 
+// Filtres
+const [searchTitle, setSearchTitle] = useState("");
+const [filterGenre, setFilterGenre] = useState("");
+const [sortByYear, setSortByYear] = useState(false);
+
 // 2. L'état de chargement (Pendant l'attente) -> true par défaut
 const [isLoading, setIsLoading] = useState(true); 
 
@@ -33,11 +38,12 @@ const [error, setError] = useState<string | null>(null);
     // On lance la récupération
     fetchMovies(); }, []);
 
-const fetchMovies = async () => { 
+const fetchMovies = async (filters?: MovieFilters) => { 
         try { 
             // On s'assure que l'erreur est vide avant de commencer 
             setError(null);
-            const data = await getAllMovies();
+            setIsLoading(true);
+            const data = await getAllMovies(filters);
             setMovies(data);
         }
         catch(err: any){
@@ -50,6 +56,22 @@ const fetchMovies = async () => {
             setIsLoading(false);
         }
     };
+
+  const handleSearch = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    fetchMovies({
+      title: searchTitle || undefined,
+      genre: filterGenre || undefined,
+      sort: sortByYear ? 'year' : undefined,
+    });
+  };
+
+  const handleResetFilters = () => {
+    setSearchTitle("");
+    setFilterGenre("");
+    setSortByYear(false);
+    fetchMovies();
+  };
 
     const handleSelectMovie = async (id: string) => { 
         try { 

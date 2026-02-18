@@ -22,7 +22,16 @@ export const createMovie = async (req: Request, res: Response): Promise<void> =>
 export const getAllMovies = async (req: Request, res: Response): Promise<void> => {
     try{
         console.log("GET /");
-        const movies = await movieModel.find();
+        const { title, genre, sort } = req.query;
+
+        const filter: Record<string, any> = {};
+        if (title) filter.title = { $regex: title as string, $options: "i" };
+        if (genre) filter.genre = genre as string;
+
+        const query = movieModel.find(filter);
+        if (sort === "year") query.sort({ year: -1 });
+
+        const movies = await query;
         res.status(200).json(movies);
         console.log("Film(s) récupéré(s)");
         
