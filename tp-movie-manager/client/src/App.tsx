@@ -9,6 +9,7 @@ function MovieCard({ movie, onSelect, onDelete }: { movie: Movie; onSelect: (id:
       <div style={{ padding: 8 }}>
         <div style={{ fontWeight: 700 }}>{movie.title}</div>
         <div style={{ color: '#555', fontSize: 13 }}>{movie.year} • {movie.genre}</div>
+        <div style={{ color: '#555', fontSize: 13 }}><i>{movie.description}</i></div>
         <div style={{ marginTop: 8, display: 'flex', justifyContent: 'space-between', gap: 8 }}>
           <button style={viewButtonStyle} onClick={(e) => { e.stopPropagation(); onSelect(movie._id!); }}>Voir</button>
           <button style={deleteButtonStyle} onClick={(e) => { e.stopPropagation(); onDelete(movie._id!); }}>Supprimer</button>
@@ -51,14 +52,16 @@ const [newMovie, setNewMovie] = useState({
     director: "",
     year: 2026,
     genre: "",
-    duration: 0
+    duration: 0,
+    description: ""
   });
   const [editMovie, setEditMovie] = useState({
     title: "",
     director: "",
     year: 2026,
     genre: "",
-    duration: 0
+    duration: 0,
+    description: ""
   });
 
     // Reactive controls (search / genre / sort)
@@ -113,7 +116,8 @@ const fetchMovies = async (opts?: { title?: string; genre?: string; sort?: strin
                director: movie.director,
                year: movie.year,
                genre: movie.genre,
-               duration: movie.duration
+               duration: movie.duration,
+               description: movie.description || ""
                });
         }
         catch(err: any){
@@ -138,7 +142,7 @@ const fetchMovies = async (opts?: { title?: string; genre?: string; sort?: strin
       setError(null);
       const created = await createMovie(newMovie);
       setMovies(prev => [...prev, created]); // mise à jour écran APRÈS le serveur
-      setNewMovie({ title: "", director: "", year: 2026, genre: "", duration: 0 });
+      setNewMovie({ title: "", director: "", year: 2026, genre: "", duration: 0, description: "" });
     } catch (err: any) {
       setError(err.message);
     }
@@ -249,6 +253,12 @@ const fetchMovies = async (opts?: { title?: string; genre?: string; sort?: strin
               onChange={e => setNewMovie({ ...newMovie, duration: parseInt(e.target.value) || 0 })}
               placeholder="Durée"
             />
+            <input style={{ padding: 8, minWidth: 160 }}
+              type="text"
+              value={newMovie.description}
+              onChange={e => setNewMovie({ ...newMovie, description: e.target.value || "" })}
+              placeholder="Description"
+            />
             <button type="submit" style={{ padding: '8px 12px' }}>Créer</button>
           </form>
         </div>
@@ -285,6 +295,7 @@ const fetchMovies = async (opts?: { title?: string; genre?: string; sort?: strin
             <input type="number" value={editMovie.year} onChange={e => setEditMovie({ ...editMovie, year: parseInt(e.target.value) || 0 })} style={{ padding: 8, width: 100 }} />
             <input type="text" value={editMovie.genre} onChange={e => setEditMovie({ ...editMovie, genre: e.target.value })} style={{ padding: 8, minWidth: 120 }} />
             <input type="number" value={editMovie.duration} onChange={e => setEditMovie({ ...editMovie, duration: parseInt(e.target.value) || 0 })} style={{ padding: 8, width: 120 }} />
+            <input type="text" value={editMovie.description} onChange={e => setEditMovie({ ...editMovie, description: e.target.value })} style={{ padding: 8, minWidth: 120 }} />
             <button type="submit" style={{ padding: '8px 12px' }}>Mettre à jour</button>
             <button type="button" style={{ padding: '8px 12px' }} onClick={() => setSelectedMovie(null)}>Fermer</button>
           </form>
