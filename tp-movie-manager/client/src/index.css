@@ -1,0 +1,186 @@
+/* ======== Reset basique ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ======== Couleurs et thèmes ======== */
+:root {
+    --primary-color: #0000ffa5;       
+    --secondary-color: #6366f1;     
+    --accent-color: #ab64f7;        
+    --bg-color: rgb(232, 223, 223);          
+    --text-color: #111827;          
+    --card-bg: #ffffff;             
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ======== Corps de page ======== */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+
+/* ======== Barre de navigation ======== */
+nav {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Liste de liens */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a:hover {
+    background-color: #6366f1; /* violet clair au survol */
+    transform: translateY(-2px);
+}
+
+/* ======== Titres ======== */
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* ======== Boutons ======== */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+/* ======== Cartes ======== */
+.card, .book-list {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    margin: 20px auto;
+    max-width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover, .book-list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px var(--shadow-color);
+}
+
+/* ======== Liens ======== */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+/* ======== Formulaires ======== */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* ======== Style du ul ======== */
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    list-style: none;
+    justify-content: center;
+   
+}
+
+/* ======== Style des li comme cartes ======== */
+ul li {
+    flex: 0 1 250px; /* largeur fixe mais flexible */
+    padding: 20px;
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    text-align: center;
+}
+
+/* Hover effect */
+ul li:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Paragraphes dans les li */
+ul li span {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Bouton dans li */
+ul li button {
+    margin-top: 12px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #4f46e5;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+ul li button:hover {
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+/* Variantes de couleur automatiques */
+ul li:nth-child(3n+1) { background: linear-gradient(135deg, #4f46e5, #6366f1); } /* violet */
+ul li:nth-child(3n+2) { background: linear-gradient(135deg, #10b981, #34d399); } /* vert */
+ul li:nth-child(3n+3) { background: linear-gradient(135deg, #f59e0b, #fbbf24); } /* orange */
