@@ -1,44 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getMovieById, createMovie, updateMovie, deleteMovie, type Movie } from './api';
-
-// Small presentational card for a movie
-function MovieCard({ movie, onSelect, onDelete }: { movie: Movie; onSelect: (id: string) => void; onDelete: (id: string) => void; }) {
-  return (
-    <div style={cardStyle} onClick={() => onSelect(movie._id!)}>
-      <img src={(movie as any).poster || 'https://via.placeholder.com/300x420?text=No+Poster'} alt={movie.title} style={posterStyle} />
-      <div style={{ padding: 8 }}>
-        <div style={{ fontWeight: 700 }}>{movie.title}</div>
-        <div style={{ color: '#555', fontSize: 13 }}>{movie.year} • {movie.genre}</div>
-        <div style={{ marginTop: 8, display: 'flex', justifyContent: 'space-between', gap: 8 }}>
-          <button style={viewButtonStyle} onClick={(e) => { e.stopPropagation(); onSelect(movie._id!); }}>Voir</button>
-          <button style={deleteButtonStyle} onClick={(e) => { e.stopPropagation(); onDelete(movie._id!); }}>Supprimer</button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Inline styles
-const gridStyle: React.CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-  gap: 16,
-  marginTop: 12,
-};
-const cardStyle: React.CSSProperties = {
-  background: '#fff',
-  border: '1px solid #e3e3e3',
-  borderRadius: 8,
-  overflow: 'hidden',
-  boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
-  cursor: 'pointer',
-  display: 'flex',
-  flexDirection: 'column',
-};
-const posterStyle: React.CSSProperties = { width: '100%', height: 300, objectFit: 'cover' };
-const deleteButtonStyle: React.CSSProperties = { background: '#ff4d4f', color: '#fff', border: 'none', padding: '6px 10px', borderRadius: 4, cursor: 'pointer' };
-const viewButtonStyle: React.CSSProperties = { background: '#1890ff', color: '#fff', border: 'none', padding: '6px 10px', borderRadius: 4, cursor: 'pointer' };
-const controlRowStyle: React.CSSProperties = { display: 'flex', gap: 8, alignItems: 'center', marginTop: 12, flexWrap: 'wrap' };
+import { getAllMovies, getMovieById, createMovie, updateMovie, deleteMovie, type Movie } from './api';
 
 function App() { 
 
@@ -61,11 +22,6 @@ const [newMovie, setNewMovie] = useState({
     duration: 0
   });
 
-    // Reactive controls
-    const [search, setSearch] = useState("");
-    const [genreFilter, setGenreFilter] = useState("");
-    const [sort, setSort] = useState('newest');
-
 // 2. L'état de chargement (Pendant l'attente) -> true par défaut
 const [isLoading, setIsLoading] = useState(true); 
 
@@ -77,30 +33,23 @@ const [error, setError] = useState<string | null>(null);
     // On lance la récupération
     fetchMovies(); }, []);
 
-const fetchMovies = async (opts?: { title?: string; genre?: string; sort?: string }) => { 
-    try { 
-      setError(null);
-      let url = '/api/movies';
-      const params = new URLSearchParams();
-      if (opts?.title) params.append('title', opts.title);
-      if (opts?.genre) params.append('genre', opts.genre);
-      if (opts?.sort) params.append('sort', opts.sort);
-      const query = params.toString();
-      if (query) url += `?${query}`;
-
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
-      const data = await response.json();
-      setMovies(data as Movie[]);
-    }
-    catch(err: any){
-      console.error("Erreur fetch:", err);
-      setError(err.message || "Impossible de contacter le serveur");
-    }
-    finally { 
-      setIsLoading(false);
-    }
-  };
+const fetchMovies = async () => { 
+        try { 
+            // On s'assure que l'erreur est vide avant de commencer 
+            setError(null);
+            const data = await getAllMovies();
+            setMovies(data);
+        }
+        catch(err: any){
+            // Gestion de l'erreur
+            console.error("Erreur fetch:", err);
+            setError(err.message || "Impossible de contacter le serveur");
+        }
+        finally { 
+            // C'est fini, on enlève le loader (Succès OU Échec)
+            setIsLoading(false);
+        }
+    };
 
     const handleSelectMovie = async (id: string) => { 
         try { 

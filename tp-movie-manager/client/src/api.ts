@@ -5,14 +5,28 @@ export interface Movie {
     year: number;
     genre : string;
     duration : number;
+    poster?: string;
+    description?: string;
 }
 
 
 const BASE_URL = '/api/movies';
 
-// GET /api/movies
-export async function getAllMovies(): Promise<Movie[]> {
-  const response = await fetch(BASE_URL);
+export interface MovieFilters {
+  title?: string;
+  genre?: string;
+  sort?: 'year';
+}
+
+// GET /api/movies?title=&genre=&sort=
+export async function getAllMovies(filters?: MovieFilters): Promise<Movie[]> {
+  const params = new URLSearchParams();
+  if (filters?.title) params.append('title', filters.title);
+  if (filters?.genre) params.append('genre', filters.genre);
+  if (filters?.sort)  params.append('sort', filters.sort);
+
+  const url = params.toString() ? `${BASE_URL}?${params}` : BASE_URL;
+  const response = await fetch(url);
 
   if (!response.ok) {
     throw new Error(`Erreur HTTP: ${response.status}`);
@@ -54,7 +68,6 @@ export async function createMovie(movie: Omit<Movie, "_id">): Promise<Movie> {
 
 
 
-// --------------------
 // PUT /api/movies/:id → mettre à jour un film
 export async function updateMovie(id: string, updateData: Partial<Movie>): Promise<Movie> {
   const response = await fetch(`${BASE_URL}/${id}`, {
