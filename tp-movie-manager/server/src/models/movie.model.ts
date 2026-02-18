@@ -7,6 +7,8 @@ export interface IMovie extends Document {
     year : number;
     genre : string;
     duration : number;
+    poster?: string; // URL de l'image
+    description?: string;
 }
 
 const MovieSchema = new Schema({
@@ -14,7 +16,10 @@ const MovieSchema = new Schema({
     director: {type: String, required: true},
     year: {type: Number, required: true},
     genre: {type: String, required: true},
-    duration: {type: Number, required: true}},
+    duration: {type: Number, required: true},
+    poster: { type: String, required: false },
+    description: { type: String, required: false }
+},
     {timestamps: true} 
 );
 
