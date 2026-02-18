@@ -29,7 +29,8 @@ export const getAllMovies = async (req: Request, res: Response): Promise<void> =
         if (genre) filter.genre = genre as string;
 
         const query = movieModel.find(filter);
-        if (sort === "year") query.sort({ year: -1 });
+        if (sort === "year" || sort === "newest") query.sort({ year: -1 });
+        else if (sort === "oldest") query.sort({ year: 1 });
 
         const movies = await query;
         res.status(200).json(movies);
