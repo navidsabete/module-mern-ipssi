@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { authController } from '../controllers/AuthController';
 
-const router = Router();
+const authRouter = Router();
 
 // Routes demandées dans le projet
-router.post('/inscription', authController.register);
-router.post('/connexion', authController.login);
+authRouter.post('/inscription', authController.register);
+authRouter.post('/connexion', authController.login);
 
-export default router;
+export default authRouter;
