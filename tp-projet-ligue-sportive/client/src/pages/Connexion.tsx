@@ -16,13 +16,23 @@ function Connexion() {
 
   const handleSubmit = (e: React.SubmitEvent) => {
 
-    e.preventDefault();
+      e.preventDefault();
 
      console.log("Données envoyées");
 
     // 🔜 Ici : appel API login
     // fetch("/api/login", { method: "POST", body: JSON.stringify(formData) })
 
+      // Simulation réponse backend
+    const fakeResponse = {
+      token: "",
+      role: "",
+    };
+  
+    localStorage.setItem("token", fakeResponse.token);
+    localStorage.setItem("role", fakeResponse.role);
+  
+    window.location.href = "/";
   }
 
   return (
