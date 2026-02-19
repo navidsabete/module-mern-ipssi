@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { login } from "../api";
 
 function Connexion() {
 
@@ -14,25 +15,19 @@ function Connexion() {
     });
   };
 
-  const handleSubmit = (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
 
       e.preventDefault();
 
-     console.log("Données envoyées");
+     try{
+      await login(formData);
+      window.location.href = "/";
+     }
+     catch(error){
+        console.log(`Erreur: ${error}`);
+     }
 
-    // 🔜 Ici : appel API login
-    // fetch("/api/login", { method: "POST", body: JSON.stringify(formData) })
-
-      // Simulation réponse backend
-    const fakeResponse = {
-      token: "abc123",
-      role: "ADHERENT",
-    };
-  
-    localStorage.setItem("token", fakeResponse.token);
-    localStorage.setItem("role", fakeResponse.role);
-  
-    window.location.href = "/";
+    
   }
 
   return (

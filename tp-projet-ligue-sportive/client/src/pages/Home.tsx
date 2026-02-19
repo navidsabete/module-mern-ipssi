@@ -39,7 +39,7 @@ function Home() {
         </div>
         )}
 
-        {role === "ADHERENT" && ( 
+        {role === "adherent" && ( 
           <button
             className="btn btn-primary"
             onClick={() => navigate("/adherent/location")}
@@ -49,7 +49,7 @@ function Home() {
         )}
 
 
-        {role === "ADMIN" && (
+        {role === "admin" && (
           <><button
             className="btn btn-primary"
             onClick={() => navigate("/adherent/location")}

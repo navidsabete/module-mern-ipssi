@@ -34,7 +34,7 @@ function Navbar() {
             Inscription
           </Link></>
         )}
-        {role === "ADHERENT" && (
+        {role === "adherent" && (
           <>
             <Link to="/adherent/location">Location</Link>
             <button className="btn-logout" onClick={handleLogout}>
@@ -43,7 +43,7 @@ function Navbar() {
           </>
         )}
 
-        {role === "ADMIN" && (
+        {role === "admin" && (
           <>
             <Link to="/adherent/location">Location</Link>
             <Link to="/admin">Admin</Link>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { register } from "../api";
 
 function Inscription() {
 
@@ -6,7 +7,7 @@ function Inscription() {
     username: "",
     email: "",
     password: "",
-    role: "ADHERENT", // rôle par défaut
+    role: "adherent", // rôle par défaut
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,25 +18,19 @@ function Inscription() {
   };
 
 
-  const handleSubmit = (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
 
     e.preventDefault();
 
      console.log("Données envoyées");
 
-    // 🔜 Ici : appel API register
-    // fetch("/api/register", { method: "POST", body: JSON.stringify(formData) })
-
-          // Simulation réponse backend
-    const fakeResponse = {
-      token: "abc123",
-      role: "ADHERENT",
-    };
-  
-    localStorage.setItem("token", fakeResponse.token);
-    localStorage.setItem("role", fakeResponse.role);
-  
-    window.location.href = "/";
+    try{
+          await register(formData);
+          window.location.href = "/";
+         }
+         catch(error){
+            console.log(`Erreur: ${error}`);
+         }
   }
   
   return (
