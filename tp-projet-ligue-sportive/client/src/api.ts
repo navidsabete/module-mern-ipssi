@@ -3,7 +3,7 @@
 // ============================
 
 export interface User {
-  id: number;
+  _id: string; // MongoDB ObjectId
   username: string;
   email: string;
   role: "adherent" | "admin";
@@ -73,3 +73,28 @@ export async function login(data: LoginData): Promise<AuthResponse> {
   return result;
 }
 
+// ============================
+// USERS (ADMIN)
+// ============================
+
+
+export async function getAllAdherents(): Promise<User[]> {
+  const response = await fetch(`${BASE_URL}/adherents`);
+
+  if (!response.ok) {
+    throw new Error(`Erreur HTTP: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function deleteAdherent(id: string): Promise<void> {
+  const response = await fetch(`${BASE_URL}/adherents/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Erreur HTTP: ${response.status}`);
+  }
+
+}

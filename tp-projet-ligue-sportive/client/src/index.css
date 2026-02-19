@@ -223,3 +223,72 @@ body {
   cursor: not-allowed;
   color: #64748b;
 }
+
+
+/* ADMIN TABLE */
+.admin-table-container {
+  margin-top: 30px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.admin-table thead {
+  background: #2563eb;
+  color: white;
+}
+
+.admin-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.admin-table tr:hover {
+  background: #e2e8f0;
+}
+
+/* BADGES */
+.badge-admin {
+  background: #f59e0b;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.badge-adherent {
+  background: #2563eb;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
