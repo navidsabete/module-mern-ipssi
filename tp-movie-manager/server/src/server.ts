@@ -35,7 +35,7 @@ async function startServer() {
         console.log("Connexion réussie à MongoDB Atlas !");
 
         app.listen(PORT, () => {
-            console.log(`Serveur Task Manager démarré sur http://localhost:${PORT}`);
+            console.log(`Serveur Movie Manager démarré sur http://localhost:${PORT}`);
         });
     }
     catch (error) {
