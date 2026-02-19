@@ -70,6 +70,10 @@ body {
   font-size: 36px;
   margin-bottom: 20px;
 }
+.hero h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
 
 .hero p {
   font-size: 18px;
@@ -157,4 +161,65 @@ body {
 
 .btn-logout:hover {
   background: #dc2626;
+}
+
+/* FILTER */
+.filter {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-filter {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #2563eb;
+  background: transparent;
+  color: #2563eb;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-filter:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-filter.active {
+  background: #2563eb;
+  color: white;
+}
+
+/* PRODUCT GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+  gap: 20px;
+}
+
+/* PRODUCT CARD */
+.product-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-card h3 {
+  color: #2563eb;
+  margin-bottom: 5px;
+}
+
+.product-card p {
+  font-size: 14px;
+  color: #334155;
+}
+
+.product-card button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  color: #64748b;
 }

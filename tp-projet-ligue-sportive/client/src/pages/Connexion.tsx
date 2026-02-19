@@ -25,8 +25,8 @@ function Connexion() {
 
       // Simulation réponse backend
     const fakeResponse = {
-      token: "",
-      role: "",
+      token: "abc123",
+      role: "ADHERENT",
     };
   
     localStorage.setItem("token", fakeResponse.token);

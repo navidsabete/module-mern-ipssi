@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 function Inscription() {
 
   const [formData, setFormData] = useState({
@@ -27,6 +26,16 @@ function Inscription() {
     // 🔜 Ici : appel API register
     // fetch("/api/register", { method: "POST", body: JSON.stringify(formData) })
 
+          // Simulation réponse backend
+    const fakeResponse = {
+      token: "abc123",
+      role: "ADHERENT",
+    };
+  
+    localStorage.setItem("token", fakeResponse.token);
+    localStorage.setItem("role", fakeResponse.role);
+  
+    window.location.href = "/";
   }
   
   return (
