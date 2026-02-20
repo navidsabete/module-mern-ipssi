@@ -2,7 +2,7 @@ import express from 'express';
 import { db } from './config/database';
 import cors from 'cors';
 
-import authRouter from './routes/authRoutes'; 
+import authRouter from './routes/AuthRoutes'; 
 import userRouter from './routes/userRoutes';
 import productRouter from './routes/productRoutes';
 
