@@ -4,7 +4,7 @@ import cors from 'cors';
 
 import authRouter from './routes/AuthRoutes'; 
 import userRouter from './routes/userRoutes';
-import productRouter from './routes/productRoutes';
+import productRouter from './routes/productRoutes'; 
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Routes API 
 app.use('/api', authRouter); // Pour /api/inscription et /api/connexion 
-app.use('/api', userRouter); // Pour /api/adherents 
+app.use('/api', userRouter); // Pour /api/adherents
 app.use('/api', productRouter); // Pour /api/produits 
 
 // Initialisation BDD et Serveur 
