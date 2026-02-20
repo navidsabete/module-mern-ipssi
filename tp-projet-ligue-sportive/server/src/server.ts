@@ -1,10 +1,10 @@
 import express from 'express';
 import { db } from './config/database';
 import cors from 'cors';
-
-// CORRECTION : Utilise des minuscules pour correspondre à ton dossier routes
 import authRouter from './routes/authRoutes'; 
 import userRouter from './routes/userRoutes';
+
+
 //import productRouter from './routes/productRoutes'; 
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Routes API 
 app.use('/api', authRouter); // Pour /api/inscription et /api/connexion 
-app.use('/api', userRouter); // Pour /api/adherents 
+app.use('/api', userRouter); // Pour /api/adherents
 //app.use('/api', productRouter); // Pour /api/produits 
 
 // Initialisation BDD et Serveur 
