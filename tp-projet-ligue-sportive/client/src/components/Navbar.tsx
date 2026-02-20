@@ -54,9 +54,6 @@ function Navbar() {
         {role === "adherent" && (
           <>
             <Link to="/adherent/location">Location</Link>
-            <button className="btn-logout" onClick={handleLogout}>
-              Logout
-            </button>
             {/* Lien Panier */}
             <Link to="/adherent/location/panier" className="cart-link">
               Panier
@@ -64,6 +61,10 @@ function Navbar() {
                 <span className="cart-badge">{cartCount}</span>
               )}
             </Link>
+            <button className="btn-logout" onClick={handleLogout}>
+              Logout
+            </button>
+            
           </>
         )}
 

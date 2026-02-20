@@ -49,7 +49,7 @@ function Location() {
     // --- RENDU CONDITIONNEL ---
     // Cas 1 : Ça charge 
     if (isLoading) { 
-        return <div className="loading-spinner">Chargement des adhérents...</div>; 
+        return <div className="loading-spinner">Chargement du catalogue...</div>; 
     } 
     
     // Cas 2 : Il y a une erreur 

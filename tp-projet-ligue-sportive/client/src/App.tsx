@@ -13,7 +13,7 @@ import Panier from "./pages/adherent/Panier";
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -65,7 +65,7 @@ function App() {
         }
         />
       </Routes>
-    </div>
+    </>
   );
 }
 
