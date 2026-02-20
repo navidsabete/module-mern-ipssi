@@ -154,7 +154,7 @@ function ProductManagement(){
         // --- RENDU CONDITIONNEL ---
     // Cas 1 : Ça charge 
     if (isLoading) { 
-        return <div className="loading-spinner">Chargement des adhérents...</div>; 
+        return <div className="loading-spinner">Chargement des produits...</div>; 
     } 
     
     // Cas 2 : Il y a une erreur 
