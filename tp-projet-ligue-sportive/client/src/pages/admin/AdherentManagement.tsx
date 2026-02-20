@@ -19,6 +19,7 @@ function AdherentManagement(){
       role: "adherent",
     });
 
+    // Formulaire mise à jour
     const [editAdherent, setEditAdherent] = useState({
       username: "",
       email: "",
@@ -26,10 +27,6 @@ function AdherentManagement(){
       role: "adherent",
     });
     
-    
-      
-  
-
       useEffect(() => {
     // On lance la récupération
     fetchAdherents(); }, []);
@@ -196,6 +193,7 @@ function AdherentManagement(){
         </form>
       </div>
 
+      {/* FORMULAIRE MISE A JOUR UTILISATEUR */}
       {selectedAdherent && (
       <div className="form-container">
         <div className="form-edit-user">

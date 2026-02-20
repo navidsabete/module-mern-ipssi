@@ -9,6 +9,7 @@ import Location from "./pages/adherent/Location";
 import Dashboard from "./pages/admin/Dashboard";
 import AdherentManagement from "./pages/admin/AdherentManagement";
 import ProductManagement from "./pages/admin/ProductManagement";
+import Panier from "./pages/adherent/Panier";
 
 function App() {
   return (
@@ -24,6 +25,14 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["adherent", "admin"]}>
               <Location />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/adherent/location/panier"
+          element={
+            <ProtectedRoute allowedRoles={["adherent", "admin"]}>
+              <Panier />
             </ProtectedRoute>
           }
         />

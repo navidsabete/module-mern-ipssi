@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../api";
 import { getAllProducts } from "../../api";
+import { addToCart } from "../../utils/panier";
 
 
 function Location() {
@@ -19,8 +20,7 @@ function Location() {
   // 2. L'état de chargement (Pendant l'attente) -> true par défaut
     const [isLoading, setIsLoading] = useState(true);   
     // 3. L'erreur (En cas de pépin) -> null par défaut 
-    const [error, setError] = useState<string | null>(null);    
-      // Formulaire création
+    const [error, setError] = useState<string | null>(null);
 
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function Location() {
               }
           };
 
-             // --- RENDU CONDITIONNEL ---
+    // --- RENDU CONDITIONNEL ---
     // Cas 1 : Ça charge 
     if (isLoading) { 
         return <div className="loading-spinner">Chargement des adhérents...</div>; 
@@ -91,16 +91,19 @@ function Location() {
               <strong>Catégorie:</strong> {product.category}
             </p>
             <p>
-              <strong>Prix:</strong> {product.price} €/jour
+              <strong>Prix:</strong> {product.price} €
             </p>
             <p>
               <strong>Stock:</strong> {product.qte_stock}
             </p>
             <button
               className="btn btn-primary"
-              disabled={!product.is_dispo}
+              disabled={product.qte_stock === 0}
+              onClick={() => {
+                addToCart(product);
+              }}
             >
-              {product.is_dispo ? "Ajouter au panier" : "Indisponible"}
+              {product.qte_stock > 0 ? "Ajouter au panier" : "Indisponible"}
             </button>
           </div>
         ))}

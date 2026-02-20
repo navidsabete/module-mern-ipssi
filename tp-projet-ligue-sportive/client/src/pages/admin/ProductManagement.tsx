@@ -16,7 +16,7 @@ function ProductManagement(){
     const [isLoading, setIsLoading] = useState(true);   
     // 3. L'erreur (En cas de pépin) -> null par défaut 
     const [error, setError] = useState<string | null>(null);    
-      // Formulaire création
+    // Formulaire création
     const [newProduct, setNewProduct] = useState({
         name: "",
         description: "",
@@ -25,6 +25,7 @@ function ProductManagement(){
         price: 0,
         qte_stock: 0,
     }); 
+    // Formulaire mise à jour
     const [editProduct, setEditProduct] = useState({
         name: "",
         description: "",
@@ -223,6 +224,7 @@ function ProductManagement(){
         </form>
       </div>
 
+      {/* FORMULAIRE MISE A JOUR UTILISATEUR */}
       {selectedProduct && (
       <div className="form-container">
         <div className="form-edit-user">
