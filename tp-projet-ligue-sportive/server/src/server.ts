@@ -23,6 +23,5 @@ app.use('/api', userRouter); // Pour /api/adherents
 db.connect().then(() => {
   app.listen(PORT, () => {
     console.log(`Serveur lancé sur http://localhost:${PORT}`);
-    console.log(`Admin test URL: http://localhost:${PORT}/api/adherents`);
   });
 });

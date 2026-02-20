@@ -30,7 +30,7 @@ function Navbar() {
       <div className="nav-links">
         <Link to="/">Accueil</Link>
         {!isAuthenticated() && (
-        <><Link to="/connexion">Connexion</Link><Link to="/inscription" className="btn-nav">
+        <><Link to="/connexion">Connexion</Link><Link to="/inscription">
             Inscription
           </Link></>
         )}

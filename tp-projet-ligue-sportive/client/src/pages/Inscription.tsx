@@ -22,8 +22,6 @@ function Inscription() {
 
     e.preventDefault();
 
-     console.log("Données envoyées");
-
     try{
           await register(formData);
           window.location.href = "/";

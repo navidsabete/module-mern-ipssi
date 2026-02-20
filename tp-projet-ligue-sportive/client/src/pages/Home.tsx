@@ -24,24 +24,24 @@ function Home() {
       {!role && (
         <div className="hero-buttons">
           <button
-            className="btn btn-primary"
+            className="btn btn-outline"
             onClick={() => navigate("/connexion")}
           >
-            Se connecter
+            Connexion
           </button>
 
           <button
             className="btn btn-outline"
             onClick={() => navigate("/inscription")}
           >
-            Créer un compte
+            Inscription
           </button>
         </div>
         )}
 
         {role === "adherent" && ( 
           <button
-            className="btn btn-primary"
+            className="btn btn-outline"
             onClick={() => navigate("/adherent/location")}
           >
             Accéder à l'espace adhérent
@@ -51,7 +51,7 @@ function Home() {
 
         {role === "admin" && (
           <><button
-            className="btn btn-primary"
+            className="btn btn-outline"
             onClick={() => navigate("/adherent/location")}
           >
             Espace adhérent
