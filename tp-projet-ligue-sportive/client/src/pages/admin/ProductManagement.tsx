@@ -192,7 +192,7 @@ function ProductManagement(){
             value={newProduct.category}
             onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
           />
-
+          <label>Prix (€) :</label>
           <input
             type="number"
             placeholder="Prix"
@@ -200,6 +200,7 @@ function ProductManagement(){
             onChange={(e) => setNewProduct({ ...newProduct, price: Number(e.target.value) })}
           />
 
+          <label>Quantité stock :</label>
           <input
             type="number"
             placeholder="Stock"
@@ -251,13 +252,13 @@ function ProductManagement(){
                    onChange={(e) => setEditProduct({ ...editProduct, category: e.target.value })}
                  />
 
-                
+                <label>Prix (€) :</label>
                 <input
                     type="number"
-                    value={editProduct.price}
+                    value={editProduct.price} 
                     onChange={(e) => setEditProduct({ ...editProduct, price: Number(e.target.value) })}
                   />
-
+                  <label>Quantité stock :</label>
                   <input
                     type="number"
                     value={editProduct.qte_stock}

@@ -13,6 +13,69 @@ class UserController {
     }
   }
 
+  // POST /api/users → création utilisateur (Admin seulement)
+  public async createAdherent(req: Request, res: Response): Promise<void> {
+      try {
+     
+        const { username, email, password, role } = req.body;
+
+        if (!username || !email || !password) {
+           res.status(400).json({ message: "Champs obligatoires manquants" });
+           return;
+        }
+
+        // 1. Vérifier si l'utilisateur existe déjà
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+          res.status(400).json({ message: "Cet email est déjà utilisé." });
+          return;
+        }
+
+        // 2. Hasher le mot de passe
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // 3. Créer l'utilisateur (Admin ou Adhérent)
+        const newUser = new User({
+          username,
+          email,
+          password: hashedPassword,
+          role: role || 'adherent' // Par défaut adhérent sauf si précisé
+        });
+
+        await newUser.save();
+
+         // Ne pas renvoyer le mot de passe
+         const userToReturn = {
+           _id: newUser._id.toString(),
+           username: newUser.username,
+           email: newUser.email,
+           role: newUser.role,
+         };
+
+        res.status(201).json(userToReturn);
+    } catch (error) {
+      res.status(500).json({ message: "Erreur lors de la création" });
+    }
+  
+  }
+
+
+  public async getAdherentById(req: Request, res: Response): Promise<void> {
+      try{
+           const { id } = req.params;
+           const user = await User.findById(id);
+           if (!user) {
+              res.status(404).json({ message: "Utilisateur non trouvé" });
+              return;
+          }
+          res.status(200).json(user);
+      }
+      catch (error) {
+      res.status(500).json({ message: "Erreur serveur" });
+    }
+
+  }
+
   // GET /api/adherents_id - Récupérer uniquement les IDs des adhérents
   public async getAdherentIds(req: Request, res: Response): Promise<void> {
     try {
@@ -42,11 +105,8 @@ class UserController {
         res.status(404).json({ message: "Adhérent non trouvé" });
         return;
       }
-
-      res.status(200).json({
-        message: "Adhérent mis à jour avec succès",
-        user: updatedUser
-      });
+      console.log("Adhérent mis à jour avec succès");
+      res.status(200).json({updatedUser});
     } catch (error) {
       res.status(500).json({ message: "Erreur lors de la mise à jour" });
     }

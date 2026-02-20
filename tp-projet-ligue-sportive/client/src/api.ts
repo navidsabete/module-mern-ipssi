@@ -46,7 +46,6 @@ export interface AdherentCreationData {
 export interface AdherentUpdateData {
   username: string;
   email: string;
-  password: string;
   role: string
 }
 

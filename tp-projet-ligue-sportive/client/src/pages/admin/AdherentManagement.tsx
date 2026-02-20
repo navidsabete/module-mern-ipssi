@@ -23,7 +23,6 @@ function AdherentManagement(){
     const [editAdherent, setEditAdherent] = useState({
       username: "",
       email: "",
-      password: "",
       role: "adherent",
     });
     
@@ -82,7 +81,6 @@ function AdherentManagement(){
              setEditAdherent({
                username: adherent.username,
                email: adherent.email,
-               password: "",
                role: adherent.role
                });
         }
@@ -102,9 +100,9 @@ function AdherentManagement(){
 
        try{
            setError(null);
-           const updated = await updateAdherent(id, editAdherent);
-           setAdherents(prev => prev.map(a => (a._id === id ? updated : a)));
-           setSelectedAdherent(updated);
+           await updateAdherent(id, editAdherent);
+           setAdherents(await getAllAdherents());
+           //setSelectedAdherent(updated);
        }
        catch(err: any){
             // Gestion de l'erreur
@@ -209,12 +207,6 @@ function AdherentManagement(){
                 type="email"
                 value={editAdherent.email}
                 onChange={e => setEditAdherent({ ...editAdherent, email: e.target.value })}
-                />
-                <input
-                type="password"
-                placeholder="Nouveau mot de passe (optionnel)"
-                value={editAdherent.password}
-                onChange={e => setEditAdherent({ ...editAdherent, password: e.target.value })}
                 />
                 <select
                   value={editAdherent.role}
