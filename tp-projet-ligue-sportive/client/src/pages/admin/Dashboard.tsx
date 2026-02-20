@@ -11,13 +11,13 @@ function Dashboard() {
         <p>Gestion des utilisateurs et produits</p>
 
         <button
-            className="btn btn-primary"
+            className="btn btn-outline"
             onClick={() => navigate("/admin/produits")}
           >
             Gestion des produits
           </button>
            <button
-            className="btn btn-primary"
+            className="btn btn-outline"
             onClick={() => navigate("/admin/adherents")}
           >
             Gestion des adhérents

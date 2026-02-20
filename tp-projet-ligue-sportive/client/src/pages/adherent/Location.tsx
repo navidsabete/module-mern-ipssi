@@ -1,86 +1,63 @@
-import { useState } from "react";
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  is_dispo: boolean;
-  category: string;
-  price: number;
-  qte_stock: number;
-}
-
-const productsData: Product[] = [
-  // Football
-  {
-    id: 1,
-    name: "Ballon de Football",
-    description: "Ballon taille 5, parfait pour les entraînements",
-    is_dispo: true,
-    category: "Football",
-    price: 5,
-    qte_stock: 10,
-  },
-  {
-    id: 2,
-    name: "Chaussures",
-    description: "Chaussures pour matchs et entraînements",
-    is_dispo: true,
-    category: "Football",
-    price: 2,
-    qte_stock: 15,
-  },
-  {
-    id: 3,
-    name: "Maillot Arbitre",
-    description: "Maillot officiel pour l'arbitre",
-    is_dispo: false,
-    category: "Football",
-    price: 3,
-    qte_stock: 0,
-  },
-
-  // Natation
-  {
-    id: 4,
-    name: "Bonnet de Natation",
-    description: "Bonnet en silicone confortable",
-    is_dispo: true,
-    category: "Natation",
-    price: 1,
-    qte_stock: 20,
-  },
-  {
-    id: 5,
-    name: "Ballon Water-Polo",
-    description: "Ballon officiel pour water-polo",
-    is_dispo: true,
-    category: "Natation",
-    price: 6,
-    qte_stock: 5,
-  },
-  {
-    id: 6,
-    name: "Lunettes de Natation",
-    description: "Lunettes ajustables pour entraînements",
-    is_dispo: false,
-    category: "Natation",
-    price: 3,
-    qte_stock: 0,
-  },
-];
+import { useEffect, useState } from "react";
+import { Product } from "../../api";
+import { getAllProducts } from "../../api";
 
 
 function Location() {
 
+  const [products, setProducts] = useState<Product[]>([]);
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
 
-  const categories = ["All", "Football", "Natation"];
+  const categories = ["All",
+  ...Array.from(new Set(products.map((p) => p.category))),];
 
-  const filteredProducts =
+  const filteredProducts =  
     categoryFilter === "All"
-      ? productsData
-      : productsData.filter((p) => p.category === categoryFilter);
+      ? products
+      : products.filter((p) => p.category === categoryFilter);
+
+  // 2. L'état de chargement (Pendant l'attente) -> true par défaut
+    const [isLoading, setIsLoading] = useState(true);   
+    // 3. L'erreur (En cas de pépin) -> null par défaut 
+    const [error, setError] = useState<string | null>(null);    
+      // Formulaire création
+
+
+  useEffect(() => {
+          // On lance la récupération
+          fetchProducts(); }, []);
+          
+          const fetchProducts = async () => { 
+              try { 
+                  // On s'assure que l'erreur est vide avant de commencer 
+                  setError(null);
+                  const data = await getAllProducts();
+                  const availableProducts = data.filter((p) => p.is_dispo);
+                  setProducts(availableProducts);
+              }
+              catch(err: any){
+                  // Gestion de l'erreur
+                  console.error("Erreur fetch:", err);
+                  setError(err.message || "Impossible de contacter le serveur");
+              }
+              finally { 
+                  // C'est fini, on enlève le loader (Succès OU Échec)
+                  setIsLoading(false);
+              }
+          };
+
+             // --- RENDU CONDITIONNEL ---
+    // Cas 1 : Ça charge 
+    if (isLoading) { 
+        return <div className="loading-spinner">Chargement des adhérents...</div>; 
+    } 
+    
+    // Cas 2 : Il y a une erreur 
+    if (error) { 
+        return <div className="error-message">Error : {error}</div>; 
+    } 
+    
+    // Cas 3 : Tout va bien, on affiche la liste 
 
 
   return (
@@ -107,7 +84,7 @@ function Location() {
         {/* Listing produits */}
       <div className="product-grid">
         {filteredProducts.map((product) => (
-          <div key={product.id} className="product-card">
+          <div key={product._id} className="product-card">
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <p>
@@ -117,8 +94,7 @@ function Location() {
               <strong>Prix:</strong> {product.price} €/jour
             </p>
             <p>
-              <strong>Stock:</strong> {product.qte_stock}{" "}
-              {product.is_dispo ? "Disponible" : "Indisponible"}
+              <strong>Stock:</strong> {product.qte_stock}
             </p>
             <button
               className="btn btn-primary"

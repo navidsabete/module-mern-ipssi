@@ -225,12 +225,29 @@ body {
 }
 
 
+.page.adherent, .page.product {
+  display: flex;
+  flex-direction: column; /* empile les enfants verticalement */
+  gap: 40px; /* espace entre form et table */
+  padding: 20px;
+}
+
+/* CONTENEURS */
+.form-container {
+  width: 100%; /* occupe toute la largeur */
+}
+
+.table-container {
+   width: 100%; /* occupe toute la largeur */
+}
+
 /* ADMIN TABLE */
 .admin-table-container {
-  margin-top: 30px;
+  margin-top: 0; /* plus besoin de marge */
   width: 100%;
   overflow-x: auto;
 }
+
 
 .admin-table {
   width: 100%;
@@ -291,4 +308,83 @@ body {
 
 .btn-delete:hover {
   background: #dc2626;
+}
+
+/* FORMULAIRE */
+.form-create-user, .form-edit-user, .form-create-product {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  max-width: 500px;
+}
+
+.form-create-user h3, .form-edit-user h3, .form-create-product h3 {
+  margin-bottom: 12px;
+  color: #2563eb;
+}
+
+.form-create-user input, .form-edit-user input, .form-create-user select, .form-edit-user select,
+.form-create-product input, .form-edit-user product, .form-create-product select, .form-edit-product select
+{
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  width: 100%;
+  font-size: 14px;
+}
+
+.form-create-user button, .form-edit-user button,
+.form-create-product button, .form-edit-product button
+{
+  width: 120px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-create-user button:hover, .form-edit-user button:hover,
+.form-create-product button:hover, .form-edit-product button:hover
+{
+  background: #1d4ed8;
+}
+
+
+.btn-edit {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: 0.3s;
+}
+
+.btn-edit:hover {
+  background: #d97706;
+}
+
+
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-cancel {
+  background: #94a3b8;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
 }
