@@ -2,10 +2,9 @@ import express from 'express';
 import { db } from './config/database';
 import cors from 'cors';
 
-// CORRECTION : Utilise des minuscules pour correspondre à ton dossier routes
 import authRouter from './routes/authRoutes'; 
 import userRouter from './routes/userRoutes';
-//import productRouter from './routes/productRoutes'; 
+import productRouter from './routes/productRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,12 +16,11 @@ app.use(express.json());
 // Routes API 
 app.use('/api', authRouter); // Pour /api/inscription et /api/connexion 
 app.use('/api', userRouter); // Pour /api/adherents 
-//app.use('/api', productRouter); // Pour /api/produits 
+app.use('/api', productRouter); // Pour /api/produits 
 
 // Initialisation BDD et Serveur 
 db.connect().then(() => {
   app.listen(PORT, () => {
     console.log(`Serveur lancé sur http://localhost:${PORT}`);
-    console.log(`Admin test URL: http://localhost:${PORT}/api/adherents`);
   });
 });

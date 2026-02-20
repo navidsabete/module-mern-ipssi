@@ -7,6 +7,8 @@ import Connexion from "./pages/Connexion";
 import Inscription from "./pages/Inscription";
 import Location from "./pages/adherent/Location";
 import Dashboard from "./pages/admin/Dashboard";
+import AdherentManagement from "./pages/admin/AdherentManagement";
+import ProductManagement from "./pages/admin/ProductManagement";
 
 function App() {
   return (
@@ -20,7 +22,7 @@ function App() {
         <Route
           path="/adherent/location"
           element={
-            <ProtectedRoute allowedRoles={["ADHERENT", "ADMIN"]}>
+            <ProtectedRoute allowedRoles={["adherent", "admin"]}>
               <Location />
             </ProtectedRoute>
           }
@@ -29,10 +31,29 @@ function App() {
         <Route
           path="/admin"
           element={
-            <ProtectedRoute allowedRoles={["ADMIN"]}>
+            <ProtectedRoute allowedRoles={["admin"]}>
               <Dashboard />
             </ProtectedRoute>
           }
+        />
+
+         <Route
+        path="/admin/produits"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ProductManagement />
+          </ProtectedRoute>
+        }
+        />
+     
+
+        <Route
+        path="/admin/adherents"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdherentManagement />
+          </ProtectedRoute>
+        }
         />
       </Routes>
     </div>

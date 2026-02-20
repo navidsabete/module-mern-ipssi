@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import { userController } from '../controllers/UserController';
 
-const router = Router();
+const userRouter = Router();
 
 // Routes réservées à l'administration 
-router.get('/adherents', userController.getAllAdherents);
-router.delete('/adherents/:id', userController.deleteUser);
+userRouter.get('/adherents', userController.getAllAdherents);
+userRouter.get('/adherents/:id', userController.getAdherentById);
+userRouter.delete('/adherents/:id', userController.deleteUser);
+userRouter.post('/adherents', userController.createAdherent);
+userRouter.put("/adherents/:id", userController.updateAdherent)
 
-export default router;
+export default userRouter;
