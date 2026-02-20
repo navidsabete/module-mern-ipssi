@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../api";
 import { getAllProducts } from "../../api";
+import { addToCart } from "../../utils/panier";
 
 
 function Location() {
@@ -98,6 +99,9 @@ function Location() {
             <button
               className="btn btn-primary"
               disabled={product.qte_stock === 0}
+              onClick={() => {
+                addToCart(product);
+              }}
             >
               {product.qte_stock > 0 ? "Ajouter au panier" : "Indisponible"}
             </button>
